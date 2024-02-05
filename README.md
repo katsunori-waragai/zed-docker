@@ -40,15 +40,13 @@ Q: /usr/local/zed/samplesはどこ？
 Q: CUDA_TOOLKIT_ROOT_DIR
 
 
-Q'
-
+Q: Docker環境の外
+Docker環境の外
 $ ls /usr/local/cuda
 bin                EULA.txt  lib64  README   targets
 compute-sanitizer  extras    nvml   samples  tools
 DOCS               include   nvvm   share    version.json
 
-
+Docker環境の内
 ls /usr/local/cuda
 include  lib64  targets
-
-
