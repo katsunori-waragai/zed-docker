@@ -38,3 +38,17 @@ Q: /usr/local/zed/samplesはどこ？
 ```
 
 Q: CUDA_TOOLKIT_ROOT_DIR
+
+
+Q'
+
+$ ls /usr/local/cuda
+bin                EULA.txt  lib64  README   targets
+compute-sanitizer  extras    nvml   samples  tools
+DOCS               include   nvvm   share    version.json
+
+
+ls /usr/local/cuda
+include  lib64  targets
+
+
