@@ -19,7 +19,7 @@
 ########################################################################
 
 import inspect
-from pprint pprint
+from pprint import pprint
 
 import pyzed.sl as sl
 
