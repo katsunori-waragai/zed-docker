@@ -26,9 +26,9 @@ def main():
     init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
     init_params.coordinate_units = sl.UNIT.MILLIMETER  # Use meter units (for depth measurements)
     init_params.camera_fps = 30  # Set fps at 30
-    init_params.confidence_threshold = 80 # 
 
     print(f"{init_params=}")
+    pprint(inspect.getmembers(init_params))  # sl.RuntimeParameters() object のデータメンバーを表示させる。
 
     # Open the camera
     err = zed.open(init_params)
