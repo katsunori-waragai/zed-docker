@@ -57,7 +57,6 @@ def main():
             print(f"Image resolution: {image.get_width()} x {image.get_height()} || Image timestamp: {timestamp.get_milliseconds()}\n")
             i = i + 1
             # print(f"{image=}")
-            print(f"{image.get_data()=}")
             data = image.get_data()  # 戻り値が配列になる。
             data = cv2.cvtColor(data, cv2.COLOR_BGRA2RGBA)
             print(f"{image.get_data_type()=}")
