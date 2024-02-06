@@ -64,7 +64,7 @@ def main():
             plt.subplot(1, 2, 1)
             plt.imshow(data)
             plt.subplot(1, 2, 2)
-            plt.imshow(depth_map_data, cmap="gist_rainbow", vmin=0, vmax=10)
+            plt.imshow(depth_map_data, cmap="gist_rainbow")
             plt.colorbar()
             plt.draw()
             plt.pause(0.01)
