@@ -83,7 +83,7 @@ def main():
             plt.imshow(data)
             plt.subplot(1, 2, 2)
             plt.imshow(depth_data, cmap="jet")
-
+            plt.show()
             # cv2.imshow("zed2", data)
             # cv2.imshow("zed2 depth", depth_data)
             # key = cv2.waitKey(-1)
