@@ -44,8 +44,11 @@ def main():
     pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
 
     runtime_parameters = sl.RuntimeParameters()
+    pprint(inspect.getmembers(runtime_parameters))  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+
     while i < 50:
         # Grab an image, a RuntimeParameters object must be given to grab()
+
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             # A new image is available if grab() returns SUCCESS
             zed.retrieve_image(image, sl.VIEW.LEFT)
