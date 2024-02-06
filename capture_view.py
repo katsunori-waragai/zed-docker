@@ -50,6 +50,7 @@ def main():
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             # A new image is available if grab() returns SUCCESS
             zed.retrieve_image(image, sl.VIEW.LEFT)
+            zed.retrieve_image(depth_image, sl.VIEW.DEPTH)
             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
             print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(),
                   timestamp.get_milliseconds()))
@@ -64,7 +65,6 @@ def main():
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
-            depth = data[:, :, 3]
             cv2.imshow("zed2", data)
             cv2.imshow("zed2 depth", depth)
             key = cv2.waitKey(-1)
