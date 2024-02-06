@@ -64,7 +64,9 @@ def main():
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
+            depth = data[:, :, 3]
             cv2.imshow("zed2", data)
+            cv2.imshow("zed2 depth", depth)
             key = cv2.waitKey(-1)
             if key & 0xff == ord('q'):
                 break
