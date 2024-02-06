@@ -62,7 +62,7 @@ def main():
             data = image.get_data()  # 戻り値が配列になる。
             print(f"{image.get_data_type()=}")
             print(f"{image.get_channels()=}")
-        q    print(f"{image.get_height()=}")
+            print(f"{image.get_height()=}")
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
