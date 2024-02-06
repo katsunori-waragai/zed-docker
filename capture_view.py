@@ -62,7 +62,7 @@ def main():
             plt.imshow(data)
             plt.subplot(1, 2, 2)
             plt.imshow(depth_map_data, cmap="jet")
-            plt.show()
+            plt.show(block=False)
 
             # cv2.imshow("zed2", data)
             # cv2.imshow("zed2 depth", depth_data)
