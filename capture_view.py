@@ -65,6 +65,13 @@ def main():
             print(f"{image.get_height()=}")
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
+
+            print(f"{depth_image.get_data_type()=}")
+            print(f"{depth_image.get_channels()=}")
+            print(f"{depth_image.get_height()=}")
+            print(f"{depth_image.get_width()=}")
+            print(f"{depth_image.get_infos()=}")
+
             depth_data = depth_image.get_data()
             cv2.imshow("zed2", data)
             cv2.imshow("zed2 depth", depth_data)
