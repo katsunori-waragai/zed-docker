@@ -65,7 +65,9 @@ def main():
             print(f"{image.get_infos()=}")
 
             cv2.imshow("zed2", data)
-            cv2.waitKey(-1)
+            key = cv2.waitKey(-1)
+            if key & 0xff == ord('q'):
+                break
 
     # Close the camera
     zed.close()
