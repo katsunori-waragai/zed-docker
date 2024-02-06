@@ -2,6 +2,8 @@
 SEE ALSO:
 https://www.stereolabs.com/docs/depth-sensing/using-depth
 
+https://github.com/stereolabs/zed-sdk/tree/master/tutorials/tutorial%203%20-%20depth%20sensing/python
+
 https://stackoverflow.com/questions/67678048/whats-the-proper-way-to-colorize-a-16-bit-depth-image
 """
 
@@ -21,6 +23,7 @@ def main():
     # Create a InitParameters object and set configuration parameters
     init_params = sl.InitParameters()
     init_params.camera_resolution = sl.RESOLUTION.AUTO # Use HD720 opr HD1200 video mode, depending on camera type.
+    init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
     init_params.camera_fps = 30  # Set fps at 30
 
     # Open the camera
