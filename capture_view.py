@@ -58,6 +58,11 @@ def main():
             pprint(inspect.getmembers(image))
             print(f"{image.get_data()=}")
             data = image.get_data()  # 戻り値が配列になる。
+            print(f"{image.get_data_type()=}")
+            print(f"{image.get_channels()=}")
+            print(f"{image.get_height()=}")
+            print(f"{image.get_width()=}")
+            print(f"{image.get_infos()=}")
 
             cv2.imshow("zed2", data)
             cv2.waitKey(-1)
