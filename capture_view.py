@@ -69,14 +69,14 @@ def main():
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
-
-            print(f"{depth_map.shape=}")
-            print(f"{depth_map.dtype=}")
+            depth_map_data = depth_map.get_data()
+            print(f"{depth_map_data.shape=}")
+            print(f"{depth_map_data.dtype=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
             plt.subplot(1, 2, 2)
-            plt.imshow(depth_map, cmap="jet")
+            plt.imshow(depth_map_data, cmap="jet")
 
             # cv2.imshow("zed2", data)
             # cv2.imshow("zed2 depth", depth_data)
