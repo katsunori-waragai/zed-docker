@@ -60,7 +60,7 @@ def main():
             print(f"{depth_map_data.dtype=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
-            plt.imshow(data[:, :, ::-1])
+            plt.imshow(data)
             plt.subplot(1, 2, 2)
             plt.imshow(depth_map_data, cmap="jet")
             plt.draw()
