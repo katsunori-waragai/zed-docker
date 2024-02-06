@@ -19,6 +19,7 @@
 ########################################################################
 
 import inspect
+from pprint pprint
 
 import pyzed.sl as sl
 
@@ -54,9 +55,10 @@ def main():
                   timestamp.get_milliseconds()))
             i = i + 1
             print(f"{image=}")
-            print(inspect.getmembers(image))
+            pprint(inspect.getmembers(image))
             print(f"{image.get_data()=}")
-            data = image.get_data()
+            data = image.get_data()  # 戻り値が配列になる。
+
             cv2.imshow("zed2", data)
             cv2.waitKey(-1)
 
