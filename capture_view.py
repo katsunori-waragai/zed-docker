@@ -62,7 +62,7 @@ def main():
             data = image.get_data()  # 戻り値が配列になる。
             print(f"{image.get_data_type()=}")
             print(f"{image.get_channels()=}")
-            print(f"{image.get_height()=}")
+        q    print(f"{image.get_height()=}")
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
@@ -73,6 +73,8 @@ def main():
             print(f"{depth_image.get_infos()=}")
 
             depth_data = depth_image.get_data()
+            print(f"{depth_data.shape=}")
+            print(f"{depth_data.dtype=}")
             cv2.imshow("zed2", data)
             cv2.imshow("zed2 depth", depth_data)
             key = cv2.waitKey(-1)
