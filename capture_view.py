@@ -11,6 +11,7 @@ from pprint import pprint
 import pyzed.sl as sl
 
 import cv2
+import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
@@ -59,6 +60,7 @@ def main():
             depth_map_data = depth_map.get_data()
             print(f"{depth_map_data.shape=}")
             print(f"{depth_map_data.dtype=}")  # expected to be "float32"
+            print(f"{np.nanmin(depth_map_data.flatten())=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
