@@ -1,22 +1,9 @@
-########################################################################
-#
-# Copyright (c) 2022, STEREOLABS.
-#
-# All rights reserved.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-# A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-# OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-# LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
-########################################################################
+"""
+SEE ALSO:
+https://www.stereolabs.com/docs/depth-sensing/using-depth
+
+https://stackoverflow.com/questions/67678048/whats-the-proper-way-to-colorize-a-16-bit-depth-image
+"""
 
 import inspect
 from pprint import pprint
@@ -24,6 +11,7 @@ from pprint import pprint
 import pyzed.sl as sl
 
 import cv2
+import matplotlib.pyplot as plt
 
 def main():
     # Create a Camera object
@@ -44,42 +32,41 @@ def main():
     # Capture 50 frames and stop
     i = 0
     image = sl.Mat()
-    depth_image = sl.Mat()
+    depth_map = sl.Mat()
+
+    pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
+
     runtime_parameters = sl.RuntimeParameters()
     while i < 50:
         # Grab an image, a RuntimeParameters object must be given to grab()
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             # A new image is available if grab() returns SUCCESS
             zed.retrieve_image(image, sl.VIEW.LEFT)
-            zed.retrieve_image(depth_image, sl.VIEW.DEPTH)
+            zed.retrieve_measure(depth_map, sl.MEASURE.DEPTH) # Retrieve depth
             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
-            print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(),
-                  timestamp.get_milliseconds()))
+            print(f"Image resolution: {image.get_width()} x {image.get_height()} || Image timestamp: {timestamp.get_milliseconds()}\n")
             i = i + 1
             print(f"{image=}")
-            pprint(inspect.getmembers(image))
             print(f"{image.get_data()=}")
             data = image.get_data()  # 戻り値が配列になる。
+            data = cv2.cvtColor(data, cv2.COLOR_BGRA2RGBA)
             print(f"{image.get_data_type()=}")
             print(f"{image.get_channels()=}")
             print(f"{image.get_height()=}")
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
-            print(f"{depth_image.get_data_type()=}")
-            print(f"{depth_image.get_channels()=}")
-            print(f"{depth_image.get_height()=}")
-            print(f"{depth_image.get_width()=}")
-            print(f"{depth_image.get_infos()=}")
-
-            depth_data = depth_image.get_data()
-            print(f"{depth_data.shape=}")
-            print(f"{depth_data.dtype=}")
-            cv2.imshow("zed2", data)
-            cv2.imshow("zed2 depth", depth_data)
-            key = cv2.waitKey(-1)
-            if key & 0xff == ord('q'):
-                break
+            depth_map_data = depth_map.get_data()
+            print(f"{depth_map_data.shape=}")
+            print(f"{depth_map_data.dtype=}")  # expected to be "float32"
+            plt.figure(1)
+            plt.subplot(1, 2, 1)
+            plt.imshow(data)
+            plt.subplot(1, 2, 2)
+            plt.imshow(depth_map_data, cmap="gist_rainbow")
+            plt.colorbar()
+            plt.draw()
+            plt.pause(0.01)
 
     # Close the camera
     zed.close()
