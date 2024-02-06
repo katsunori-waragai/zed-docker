@@ -45,7 +45,7 @@ def main():
     # Capture 50 frames and stop
     i = 0
     image = sl.Mat()
-    depth_image = sl.Mat()
+    depth_map = sl.Mat()
 
     pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
 
