@@ -44,8 +44,7 @@ def main():
             zed.retrieve_image(image, sl.VIEW.LEFT)
             zed.retrieve_measure(depth_map, sl.MEASURE.DEPTH) # Retrieve depth
             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
-            print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(),
-                  timestamp.get_milliseconds()))
+            print(f"Image resolution: {image.get_width()} x {image.get_height()} || Image timestamp: {timestamp.get_milliseconds()}\n")
             i = i + 1
             print(f"{image=}")
             print(f"{image.get_data()=}")
@@ -59,7 +58,7 @@ def main():
 
             depth_map_data = depth_map.get_data()
             print(f"{depth_map_data.shape=}")
-            print(f"{depth_map_data.dtype=}")
+            print(f"{depth_map_data.dtype=}")  # expected to be "float32"
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
@@ -68,12 +67,6 @@ def main():
             plt.colorbar()
             plt.draw()
             plt.pause(0.01)
-
-            # cv2.imshow("zed2", data)
-            # cv2.imshow("zed2 depth", depth_data)
-            # key = cv2.waitKey(-1)
-            # if key & 0xff == ord('q'):
-            #     break
 
     # Close the camera
     zed.close()
