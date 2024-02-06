@@ -55,7 +55,7 @@ def main():
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             # A new image is available if grab() returns SUCCESS
             zed.retrieve_image(image, sl.VIEW.LEFT)
-            zed.retrieve_image(depth_image, sl.VIEW.DEPTH)
+            zed.retrieve_measure(depth_map, sl.MEASURE.DEPTH) # Retrieve depth
             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
             print("Image resolution: {0} x {1} || Image timestamp: {2}\n".format(image.get_width(), image.get_height(),
                   timestamp.get_milliseconds()))
@@ -69,25 +69,14 @@ def main():
             print(f"{image.get_width()=}")
             print(f"{image.get_infos()=}")
 
-            print(f"{depth_image.get_data_type()=}")
-            print(f"{depth_image.get_channels()=}")
-            print(f"{depth_image.get_height()=}")
-            print(f"{depth_image.get_width()=}")
-            print(f"{depth_image.get_infos()=}")
 
-            depth_data = depth_image.get_data()
-            print(f"{depth_data.shape=}")
-            print(f"{depth_data.dtype=}")
+            print(f"{depth_map.shape=}")
+            print(f"{depth_map.dtype=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
-            plt.subplot(2, 2, 2)
-            plt.imshow(depth_data[:, :, 0], cmap="jet")
-            plt.subplot(2, 2, 3)
-            plt.imshow(depth_data[:, :, 1], cmap="jet")
-            plt.subplot(2, 2, 4)
-            plt.imshow(depth_data[:, :, 2], cmap="jet")
-            plt.show()
+            plt.subplot(1, 2, 2)
+            plt.imshow(depth_map, cmap="jet")
 
             # cv2.imshow("zed2", data)
             # cv2.imshow("zed2 depth", depth_data)
