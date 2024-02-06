@@ -24,6 +24,7 @@ from pprint import pprint
 import pyzed.sl as sl
 
 import cv2
+import matplotlib.pyplot as plt
 
 def main():
     # Create a Camera object
@@ -45,6 +46,9 @@ def main():
     i = 0
     image = sl.Mat()
     depth_image = sl.Mat()
+
+    pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
+
     runtime_parameters = sl.RuntimeParameters()
     while i < 50:
         # Grab an image, a RuntimeParameters object must be given to grab()
@@ -57,7 +61,6 @@ def main():
                   timestamp.get_milliseconds()))
             i = i + 1
             print(f"{image=}")
-            pprint(inspect.getmembers(image))
             print(f"{image.get_data()=}")
             data = image.get_data()  # 戻り値が配列になる。
             print(f"{image.get_data_type()=}")
@@ -75,11 +78,17 @@ def main():
             depth_data = depth_image.get_data()
             print(f"{depth_data.shape=}")
             print(f"{depth_data.dtype=}")
-            cv2.imshow("zed2", data)
-            cv2.imshow("zed2 depth", depth_data)
-            key = cv2.waitKey(-1)
-            if key & 0xff == ord('q'):
-                break
+            plt.figure()
+            plt.subplot(1, 2, 1)
+            plt.imshow(data)
+            plt.subplot(1, 2, 2)
+            plt.imshow(depth_data, cmap="jet")
+
+            # cv2.imshow("zed2", data)
+            # cv2.imshow("zed2 depth", depth_data)
+            # key = cv2.waitKey(-1)
+            # if key & 0xff == ord('q'):
+            #     break
 
     # Close the camera
     zed.close()
