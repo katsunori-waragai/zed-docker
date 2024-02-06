@@ -1,6 +1,8 @@
 """
 SEE ALSO:
 https://www.stereolabs.com/docs/depth-sensing/using-depth
+
+https://stackoverflow.com/questions/67678048/whats-the-proper-way-to-colorize-a-16-bit-depth-image
 """
 
 import inspect
@@ -62,7 +64,7 @@ def main():
             plt.subplot(1, 2, 1)
             plt.imshow(data)
             plt.subplot(1, 2, 2)
-            plt.imshow(depth_map_data, cmap="jet")
+            plt.imshow(depth_map_data, cmap="viridis")
             plt.draw()
             plt.pause(0.01)
 
