@@ -44,6 +44,7 @@ def main():
     # Capture 50 frames and stop
     i = 0
     image = sl.Mat()
+    depth_image = sl.Mat()
     runtime_parameters = sl.RuntimeParameters()
     while i < 50:
         # Grab an image, a RuntimeParameters object must be given to grab()
