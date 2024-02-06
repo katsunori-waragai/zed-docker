@@ -26,6 +26,7 @@ def main():
     init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
     init_params.coordinate_units = sl.UNIT.MILLIMETER  # Use meter units (for depth measurements)
     init_params.camera_fps = 30  # Set fps at 30
+    init_params.texture_confidence_threshold = 90
 
     print(f"{init_params=}")
     pprint(inspect.getmembers(init_params))  # sl.RuntimeParameters() object のデータメンバーを表示させる。
@@ -60,16 +61,18 @@ def main():
             # print(f"{image=}")
             data = image.get_data()  # 戻り値が配列になる。
             data = cv2.cvtColor(data, cv2.COLOR_BGRA2RGBA)
-            print(f"{image.get_data_type()=}")
-            print(f"{image.get_channels()=}")
-            print(f"{image.get_height()=}")
-            print(f"{image.get_width()=}")
-            print(f"{image.get_infos()=}")
+            if i <= 1:
+                print(f"{image.get_data_type()=}")
+                print(f"{image.get_channels()=}")
+                print(f"{image.get_height()=}")
+                print(f"{image.get_width()=}")
+                print(f"{image.get_infos()=}")
 
             depth_map_data = depth_map.get_data()
-            print(f"{depth_map_data.shape=}")
-            print(f"{depth_map_data.dtype=}")  # expected to be "float32"
-            print(f"{np.nanmin(depth_map_data.flatten())=}")
+            if i <= 1:
+                print(f"{depth_map_data.shape=}")
+                print(f"{depth_map_data.dtype=}")  # expected to be "float32"
+                print(f"{np.nanmin(depth_map_data.flatten())=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
