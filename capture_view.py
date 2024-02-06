@@ -24,7 +24,10 @@ def main():
     init_params = sl.InitParameters()
     init_params.camera_resolution = sl.RESOLUTION.AUTO # Use HD720 opr HD1200 video mode, depending on camera type.
     init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
+    init_params.coordinate_units = sl.UNIT.MILLIMETER  # Use meter units (for depth measurements)
     init_params.camera_fps = 30  # Set fps at 30
+
+    print(f"{init_params=}")
 
     # Open the camera
     err = zed.open(init_params)
