@@ -5,18 +5,40 @@ docker example for zed sdk (stereolabs) on Jetson
 ## Direct install of ZED SDK
 - 直接 ZED SDKをインストール
 
+JetPack のバージョンに合わせたインストーラーをダウンロードする。
+`ZED_SDK_Tegra_L4T35.2_v4.0.8.zstd.run`
+インストーラーを実行する。
+
+## ZED SDK /samples
+
+```
+git clone https://github.com/stereolabs/zed-sdk
+```
+
 ### 実行結果例
-zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py 
+python　スクリプトは、容易に実行できる。
+
+#### body tracking 人のポーズ推定でのtracking
+zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py
 
 
 ![](fig/body_tracking_python.png)
 
-object detection/image viewer/python$ python3 object_detection_image_viewer.py 
+#### object detection での検出結果の表示
+object detection/image viewer/python$ python3 object_detection_image_viewer.py
 
 ![](fig/object_detection_image_viewer.png)
 
+#### object detectionでのbird_viewでの表示
 object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
 ![](fig/object_detection_birds_view.png)
+図の右側に、検出された人の位置を表示している。
+
+#### positinal tracking
+positional tracking/positional tracking/python$ python3 positional_tracking.py
+![]()
+図に、ZED2のカメラ自体の位置の変化が表示される。
+
 ## install ZED SDK using Docker
 
 
