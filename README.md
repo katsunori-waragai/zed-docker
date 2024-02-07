@@ -1,7 +1,24 @@
 # zed-docker
 docker example for zed sdk (stereolabs) on Jetson
 
-## install
+
+## Direct install of ZED SDK
+- 直接 ZED SDKをインストール
+
+### 実行結果例
+zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py 
+
+
+![](fig/body_tracking_python.png)
+
+object detection/image viewer/python$ python3 object_detection_image_viewer.py 
+
+![](fig/object_detection_image_viewer.png)
+
+object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
+![](fig/object_detection_birds_view.png)
+## install ZED SDK using Docker
+
 
 ### 以下のdocker hub から該当するtagを見つけること
 https://hub.docker.com/r/stereolabs/zed/
