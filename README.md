@@ -11,6 +11,10 @@ zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py
 
 ![](fig/body_tracking_python.png)
 
+object detection/image viewer/python$ python3 object_detection_image_viewer.py 
+
+![](fig/object_decetion_image_viewer.png)
+
 ## install ZED SDK using Docker
 
 
