@@ -2,6 +2,8 @@
 SEE ALSO:
 https://www.stereolabs.com/docs/depth-sensing/using-depth
 
+https://github.com/stereolabs/zed-sdk/tree/master/tutorials/tutorial%203%20-%20depth%20sensing/python
+
 https://stackoverflow.com/questions/67678048/whats-the-proper-way-to-colorize-a-16-bit-depth-image
 """
 
@@ -11,6 +13,7 @@ from pprint import pprint
 import pyzed.sl as sl
 
 import cv2
+import numpy as np
 import matplotlib.pyplot as plt
 
 def main():
@@ -20,7 +23,13 @@ def main():
     # Create a InitParameters object and set configuration parameters
     init_params = sl.InitParameters()
     init_params.camera_resolution = sl.RESOLUTION.AUTO # Use HD720 opr HD1200 video mode, depending on camera type.
+    init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
+    init_params.coordinate_units = sl.UNIT.MILLIMETER  # Use meter units (for depth measurements)
     init_params.camera_fps = 30  # Set fps at 30
+    init_params.enable_right_side_measure = True
+    print(f"{init_params=}")
+    pprint(f"{inspect.getmembers(init_params)}")  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    print("---")
 
     # Open the camera
     err = zed.open(init_params)
@@ -34,11 +43,16 @@ def main():
     image = sl.Mat()
     depth_map = sl.Mat()
 
-    pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
+    pprint(f"{inspect.getmembers(image)}")  # sl.Mat() object のデータメンバーを表示させる。
+    print("---")
 
     runtime_parameters = sl.RuntimeParameters()
-    while i < 50:
+    pprint(f"{inspect.getmembers(runtime_parameters)}")  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    print("---")
+
+    while i < 5:
         # Grab an image, a RuntimeParameters object must be given to grab()
+
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
             # A new image is available if grab() returns SUCCESS
             zed.retrieve_image(image, sl.VIEW.LEFT)
@@ -46,19 +60,21 @@ def main():
             timestamp = zed.get_timestamp(sl.TIME_REFERENCE.CURRENT)  # Get the timestamp at the time the image was captured
             print(f"Image resolution: {image.get_width()} x {image.get_height()} || Image timestamp: {timestamp.get_milliseconds()}\n")
             i = i + 1
-            print(f"{image=}")
-            print(f"{image.get_data()=}")
+            # print(f"{image=}")
             data = image.get_data()  # 戻り値が配列になる。
             data = cv2.cvtColor(data, cv2.COLOR_BGRA2RGBA)
-            print(f"{image.get_data_type()=}")
-            print(f"{image.get_channels()=}")
-            print(f"{image.get_height()=}")
-            print(f"{image.get_width()=}")
-            print(f"{image.get_infos()=}")
+            if i <= 1:
+                print(f"{image.get_data_type()=}")
+                print(f"{image.get_channels()=}")
+                print(f"{image.get_height()=}")
+                print(f"{image.get_width()=}")
+                print(f"{image.get_infos()=}")
 
             depth_map_data = depth_map.get_data()
-            print(f"{depth_map_data.shape=}")
-            print(f"{depth_map_data.dtype=}")  # expected to be "float32"
+            if i <= 1:
+                print(f"{depth_map_data.shape=}")
+                print(f"{depth_map_data.dtype=}")  # expected to be "float32"
+                print(f"{np.nanmin(depth_map_data.flatten())=}")
             plt.figure(1)
             plt.subplot(1, 2, 1)
             plt.imshow(data)
