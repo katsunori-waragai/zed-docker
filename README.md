@@ -37,6 +37,8 @@ object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
 図の右側に、検出された人の位置を表示している。
 
 #### positinal tracking
+- ZED2iには、IMUが内蔵されています。
+- それを利用してカメラがどのように移動しているのかを知ることができます。
 positional tracking/positional tracking/python$ python3 positional_tracking.py
 ![](fig/positional_tracking.png)
 図に、ZED2のカメラ自体の位置の変化が表示される。
@@ -44,8 +46,9 @@ positional tracking/positional tracking/python$ python3 positional_tracking.py
 ### pytorch_yolov8
 object detection/custom detector/python/pytorch_yolov8$ python3 detector.py
 ![](fig/pytorch_yolov8.png)
-yolov8 を用いているので検出対象物の種類が増えている。
-検出した対象物の種類はMS COCO データセットのカテゴリの番号
+- yolov8 を用いているので検出対象物の種類が増えている。
+- 検出した対象物の種類はMS COCO データセットのカテゴリの番号
+- ここでは検出枠の情報を用いている。
 
 #### 注意：dockerもvenvも使わない流儀は推奨しない
 - ここでは、python3 detector.py の実行時に、ultralyticsが必要になったため、 `pip3 install` している。しかし、この流儀は、ベースの環境を汚染するので好ましくない。
@@ -108,3 +111,9 @@ DOCS               include   nvvm   share    version.json
 Docker環境の内
 ls /usr/local/cuda
 include  lib64  targets
+
+## How about
+- Docker環境の構築をやり直してはどうだろうか。
+ZED SDKのインストール作業を Dockerfile中で記述してはどうだろうか？
+
+ 
