@@ -13,7 +13,7 @@ zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py
 
 object detection/image viewer/python$ python3 object_detection_image_viewer.py 
 
-![](fig/object_decetion_image_viewer.png)
+![](fig/object_detection_image_viewer.png)
 
 object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
 ![](fig/object_detection_birds_view.png)
