@@ -36,7 +36,7 @@ object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
 
 #### positinal tracking
 positional tracking/positional tracking/python$ python3 positional_tracking.py
-![]()
+![](fig/positional_tracking.png)
 図に、ZED2のカメラ自体の位置の変化が表示される。
 
 ## install ZED SDK using Docker
