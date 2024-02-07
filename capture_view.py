@@ -26,10 +26,10 @@ def main():
     init_params.depth_mode = sl.DEPTH_MODE.ULTRA  # Use ULTRA depth mode
     init_params.coordinate_units = sl.UNIT.MILLIMETER  # Use meter units (for depth measurements)
     init_params.camera_fps = 30  # Set fps at 30
-    init_params.texture_confidence_threshold = 90
 
     print(f"{init_params=}")
-    pprint(inspect.getmembers(init_params))  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    pprint(f"{inspect.getmembers(init_params)}")  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    print("---")
 
     # Open the camera
     err = zed.open(init_params)
@@ -43,12 +43,14 @@ def main():
     image = sl.Mat()
     depth_map = sl.Mat()
 
-    pprint(inspect.getmembers(image))  # sl.Mat() object のデータメンバーを表示させる。
+    pprint(f"{inspect.getmembers(image)}")  # sl.Mat() object のデータメンバーを表示させる。
+    print("---")
 
     runtime_parameters = sl.RuntimeParameters()
-    pprint(inspect.getmembers(runtime_parameters))  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    pprint(f"{inspect.getmembers(runtime_parameters)}")  # sl.RuntimeParameters() object のデータメンバーを表示させる。
+    print("---")
 
-    while i < 50:
+    while i < 5:
         # Grab an image, a RuntimeParameters object must be given to grab()
 
         if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
