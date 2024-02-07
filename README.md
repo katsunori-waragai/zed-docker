@@ -42,11 +42,21 @@ positional tracking/positional tracking/python$ python3 positional_tracking.py
 図に、ZED2のカメラ自体の位置の変化が表示される。
 
 ### pytorch_yolov8
-object detection/custom detector/python/pytorch_yolov8$ python detector.py
+object detection/custom detector/python/pytorch_yolov8$ python3 detector.py
 ![](fig/pytorch_yolov8.png)
 yolov8 を用いているので検出対象物の種類が増えている。
 検出した対象物の種類はMS COCO データセットのカテゴリの番号
 
+#### 注意：dockerもvenvも使わない流儀は推奨しない
+- ここでは、python3 detector.py の実行時に、ultralyticsが必要になったため、 `pip3 install` している。しかし、この流儀は、ベースの環境を汚染するので好ましくない。
+
+```
+object detection/custom detector/python/pytorch_yolov8$ python detector.py
+Traceback (most recent call last):
+  File "detector.py", line 10, in <module>
+    from ultralytics import YOLO
+ModuleNotFoundError: No module named 'ultralytics'
+```
 
 ## install ZED SDK using Docker
 
