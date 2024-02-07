@@ -41,6 +41,13 @@ positional tracking/positional tracking/python$ python3 positional_tracking.py
 ![](fig/positional_tracking.png)
 図に、ZED2のカメラ自体の位置の変化が表示される。
 
+### pytorch_yolov8
+object detection/custom detector/python/pytorch_yolov8$ python detector.py
+![](fig/pytorch_yolov8.png)
+yolov8 を用いているので検出対象物の種類が増えている。
+検出した対象物の種類はMS COCO データセットのカテゴリの番号
+
+
 ## install ZED SDK using Docker
 
 
