@@ -15,6 +15,8 @@ JetPack のバージョンに合わせたインストーラーをダウンロー
 git clone https://github.com/stereolabs/zed-sdk
 ```
 
+それぞれのsample application の説明は、上記のgithug のリポジトリの各README.md に記載がある。
+
 ### 実行結果例
 python　スクリプトは、容易に実行できる。
 
