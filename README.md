@@ -99,7 +99,7 @@ Q: /usr/local/zed/samplesはどこ？
 ```
 
 Q: CUDA_TOOLKIT_ROOT_DIR
-
+dockerを使わないで直接インストールしたら、cmakeで上記のエラーは出なかった。
 
 Q: Docker環境の外
 Docker環境の外
@@ -115,5 +115,3 @@ include  lib64  targets
 ## How about
 - Docker環境の構築をやり直してはどうだろうか。
 ZED SDKのインストール作業を Dockerfile中で記述してはどうだろうか？
-
- 
