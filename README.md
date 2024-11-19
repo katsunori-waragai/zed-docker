@@ -46,7 +46,8 @@ Dockerの仮想環境が立ち上がる。
 ls zed-sdk
 ```
 
-とすると、このDockerImage 作成時点でのGitHub　https://github.com/stereolabs/zed-sdk　のフォルダも含んでいる。
+とすると、
+このDockerImage 作成時点での[GitHubのフォルダ](https://github.com/stereolabs/zed-sdk)も含んでいるのがわかる。
 
 #### 選択肢２：Docker環境の中でZED SDK をインストールする。
 PyTorchなどの設定を含んだDockerImageを元に、環境を構築したいこともある。
