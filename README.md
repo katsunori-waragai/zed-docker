@@ -139,13 +139,15 @@ object detection/custom detector/python/pytorch_yolov8$ python3 detector.py
 - yolov8 を用いているので検出対象物の種類が増えている。
 - 検出した対象物の種類はMS COCO データセットのカテゴリの番号
 - ここでは検出枠の情報を用いている。
+- 画面のうち１つは、点群を描画したものになっている。
 - [YOLOV8](https://github.com/ultralytics/ultralytics) はAGPL-3.0 Licenseなので、商用利用には適さない。
   - そこで、ライセンスの問題が少なそうなYOLOXで置換えた版を以下のリポジトリに公開している。
   https://github.com/katsunori-waragai/yolox-zed-sdk
   -　あるいは`An MIT rewrite of YOLOv9` を使って書き直すとよい。
   - https://github.com/WongKinYiu/YOLO
 #### ultralytics　が見つからなかったとき
-- ここでは、python3 detector.py の実行時に、ultralyticsが必要になったため、 `pip3 install` している。しかし、この流儀は、ベースの環境を汚染するので好ましくない。
+- ここでは、python3 detector.py の実行時に、ultralyticsが必要になったため、 `pip3 install` している。
+- その後,python3 detector.py を再実行すれば動作する。
 
 ```
 object detection/custom detector/python/pytorch_yolov8$ python detector.py
@@ -154,6 +156,12 @@ Traceback (most recent call last):
     from ultralytics import YOLO
 ModuleNotFoundError: No module named 'ultralytics'
 ```
+
+#### 付記：TensorRTをが活用されてない
+標準で配布されているスクリプトの中では,
+YoloV8とpytorchモデルyolov8m.pt を使っていて、TensorRT化していない。
+ハードウェアの性能を引き出すためには、[torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) を使うのがいいだろう。
+
 
 --------------------------------------------------------------
 ## install ZED SDK using Docker
