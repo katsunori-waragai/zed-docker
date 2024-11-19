@@ -1,6 +1,9 @@
-# zed-docker
+# zed-docker-jpn
 docker example for zed sdk (stereolabs) on Jetson
-
+(まえはzed-dockerというリポジトリ名にしていた。
+以下のものとリポジトリ名がかぶることに気づいたので、リポジトリ名を変更した。
+https://github.com/stereolabs/zed-docker　
+)
 ## このリポジトリの目的
 - ZED SDKのサンプルをDocker Imageに基づいて動作させるやり方への解説
 - 理由：
