@@ -79,8 +79,7 @@ git clone https://github.com/stereolabs/zed-sdk
 - また、Githubのzed-sdk のサンプルプログラムを仮想環境を使わずに直接インストール
 　この場合、サンプルプログラムのインストール時に、環境を改変してしまうことで、他のアプリケーションが動作しなくなってしまう可能性が生じる。
 
-
-### 実行結果例
+## 実行結果例
 python　スクリプトは、容易に実行できる。
 
 #### body tracking 人のポーズ推定でのtracking
@@ -99,6 +98,12 @@ object detection/image viewer/python$ python3 object_detection_image_viewer.py
 
 物体検出の結果を3Dの検出枠で表示します。
 
+検出結果には、tracking IDがついています。
+3Dでの追跡を行なっているので、人物が手前側・奥側で交差しても、tracking IDが入れ替わることはほぼありません。
+
+３Dでの検出枠については、以下のように数値を得ることができます。
+https://www.stereolabs.com/docs/object-detection/using-object-detection#getting-3d-bounding-boxes
+
 
 #### object detectionでのbird_viewでの表示
 object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
@@ -114,6 +119,13 @@ Depth Range Max
 1.5m to 35m (4.9ft to 114.8ft) with 4 mm lens
 ```
 
+右側のTop View は、縦横比は守られていません。
+スケーリングも示されていない。
+改善の余地があります。
+
+ZED2カメラにはIMUが含まれているので、カメラの姿勢を考慮して、世界座標系の値を算出できます。
+このサンプルでは、世界座標系での座標になっています。
+
 #### positional tracking
 - ZED2iには、IMUが内蔵されています。
 - それを利用してカメラがどのように移動しているのかを知ることができます。
@@ -127,8 +139,12 @@ object detection/custom detector/python/pytorch_yolov8$ python3 detector.py
 - yolov8 を用いているので検出対象物の種類が増えている。
 - 検出した対象物の種類はMS COCO データセットのカテゴリの番号
 - ここでは検出枠の情報を用いている。
-
-#### 注意：dockerもvenvも使わない流儀は推奨しない
+- [YOLOV8](https://github.com/ultralytics/ultralytics) はAGPL-3.0 Licenseなので、商用利用には適さない。
+  - そこで、ライセンスの問題が少なそうなYOLOXで置換えた版を以下のリポジトリに公開している。
+  https://github.com/katsunori-waragai/yolox-zed-sdk
+  -　あるいは`An MIT rewrite of YOLOv9` を使って書き直すとよい。
+  - https://github.com/WongKinYiu/YOLO
+#### ultralytics　が見つからなかったとき
 - ここでは、python3 detector.py の実行時に、ultralyticsが必要になったため、 `pip3 install` している。しかし、この流儀は、ベースの環境を汚染するので好ましくない。
 
 ```
@@ -202,6 +218,3 @@ Docker環境の内
 ls /usr/local/cuda
 include  lib64  targets
 
-## How about
-- Docker環境の構築をやり直してはどうだろうか。
-ZED SDKのインストール作業を Dockerfile中で記述してはどうだろうか？
