@@ -1,4 +1,4 @@
-FROM stereolabs/zed:4.0-py-devel-jetson-jp5.1.0
+FROM stereolabs/zed:4.2-py-devel-jetson-jp5.1.0
 RUN apt update
 RUN apt install sudo
 RUN apt-get install -y zip
