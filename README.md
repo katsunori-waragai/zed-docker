@@ -162,6 +162,13 @@ ModuleNotFoundError: No module named 'ultralytics'
 YoloV8とpytorchモデルyolov8m.pt を使っていて、TensorRT化していない。
 ハードウェアの性能を引き出すためには、[torch2trt](https://github.com/NVIDIA-AI-IOT/torch2trt) を使うのがいいだろう。
 
+### python3 depth_sensing.py
+![](fig/depth_sensing.png)
+
+depth sensingを実行した結果の点群が表示されます。
+OpenGLで点群の表示がされています。画面をマウスで操作して表示の向きを変えることができます。
+上記の画面キャプチャはそうした結果の１例です。
+
 
 --------------------------------------------------------------
 ## install ZED SDK using Docker
