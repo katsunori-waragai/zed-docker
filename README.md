@@ -18,6 +18,7 @@ docker example for zed sdk (stereolabs) on Jetson
 - Cudaデバイスが利用可能なPC（Windows, Ubuntu)
 ### 必須のハードウェア
 ZED2, ZED2i, ZED-X などのStereoLabsのステレオカメラ
+ネットワーク環境：　スクリプトの実行時にモデルファイルをダウンロードします。
 
 #### ZED SDKとは
 1. インストラーでインストーされるSDK部分
@@ -25,17 +26,15 @@ ZED2, ZED2i, ZED-X などのStereoLabsのステレオカメラ
 この２つがある。
 以下の記述の中ではZED SDKとしては、インストーラでインストールされるSDKの部分を指している。
 ## 1. SDKのインストール
-#### 選択肢１：Direct install of ZED SDK
-- 直接 ZED SDKをインストール
-- また、Githubのzed-sdk のサンプルプログラムを仮想環境を使わずに直接インストール
-　この場合、サンプルプログラムのインストール時に、環境を改変してしまうことで、他のアプリケーションが動作しなくなってしまう可能性が生じる。
+#### 選択肢1：Docker image by StereoLabs
+ZED SDK をインストール済みのDockerImageを立ち上げる。
 
-#### 選択肢２：Docker image by StereoLabs
+以下のようにStereoLabsによって、ZED SDK をインストール済みのDockerImage が提供されている。
+Jetson用、PC用とがある。
+
 https://hub.docker.com/r/stereolabs/zed/tags
 
-JetPack のバージョンに合わせたインストーラーをダウンロードする。
-`ZED_SDK_Tegra_L4T35.2_v4.0.8.zstd.run`
-インストーラーを実行する。
+Dockerfile のFROM行に利用するDockerImageを記載する。
 
 実際の作業
 1. bash docker_build.sh
@@ -43,8 +42,29 @@ JetPack のバージョンに合わせたインストーラーをダウンロー
 3. bash docker_run.sh
 
 Dockerの仮想環境が立ち上がる。
+```commandline
+ls zed-sdk
+```
 
-## ZED SDK /samplesのインストール
+とすると、このDockerImage 作成時点でのGitHub　https://github.com/stereolabs/zed-sdk　のフォルダも含んでいる。
+
+#### 選択肢２：Docker環境の中でZED SDK をインストールする。
+PyTorchなどの設定を含んだDockerImageを元に、環境を構築したいこともある。
+そのような場合には、Dockerfile の中で、以下のように
+JetPack のバージョンに合わせたインストーラーをダウンロードする。
+`ZED_SDK_Tegra_L4T35.2_v4.0.8.zstd.run`
+インストーラーを実行する。
+以下のような内容をDockerfile 中に記載する。
+```
+ENV ZED_SDK_INSTALLER=ZED_SDK_Tegra_L4T35.3_v4.1.0.zstd.run
+RUN wget --quiet -O ${ZED_SDK_INSTALLER} https://download.stereolabs.com/zedsdk/4.1/l4t35.2/jetsons
+RUN chmod +x ${ZED_SDK_INSTALLER} && ./${ZED_SDK_INSTALLER} -- silent
+```
+
+もし、https://github.com/stereolabs/zed-sdk　のフォルダがほしい場合には
+別途 git clone を追記すればよい。
+
+###### ZED SDK /samplesのインストール
 以下は、その仮想環境内で実施する。
 
 ```
@@ -53,12 +73,18 @@ git clone https://github.com/stereolabs/zed-sdk
 
 それぞれのsample application の説明は、上記のgithub のリポジトリの各README.md に記載がある。
 
+
+#### 選択肢３：Direct install of ZED SDK　(非推奨)
+- 直接 ZED SDKをインストール
+- また、Githubのzed-sdk のサンプルプログラムを仮想環境を使わずに直接インストール
+　この場合、サンプルプログラムのインストール時に、環境を改変してしまうことで、他のアプリケーションが動作しなくなってしまう可能性が生じる。
+
+
 ### 実行結果例
 python　スクリプトは、容易に実行できる。
 
 #### body tracking 人のポーズ推定でのtracking
 zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py
-
 
 
 ![](fig/body_tracking_python.png)
@@ -80,7 +106,7 @@ object detection/birds eye viewer/python$ python3 object_detection_birds_view.py
 図の右側に、検出された人の位置を表示している。
 
 StereoLabsのカメラは以下の計測範囲です。
-このカメラは焦点距離 2.1mm のを選択しているので、20m までが算出可能です「。
+このカメラは焦点距離 2.1mm のを選択しているので、20m までが算出可能です。
 
 ```commandline
 Depth Range Max
@@ -152,6 +178,18 @@ sudo apt install build-essential
 
 ### Q: CUDA_TOOLKIT_ROOT_DIR
 dockerを使わないで直接インストールしたら、cmakeで上記のエラーは出なかった。
+
+### Q: ZED SDK の新規バージョンへの対応
+Docker Imageの所在
+https://hub.docker.com/r/stereolabs/zed/tags?page=1&name=ubuntu20.04
+
+stereolabs/zed:4.2-py-devel-jetson-jp5.1.1
+4.2はzed-sdkのバージョン
+jp5.1.1はJetpack5.1.1　を意味する。
+
+Dockerfile中のFROM行に記載するDockerImageを置き換える。
+
+### Q:　
 
 ### Q: Docker環境の外
 Docker環境の外
