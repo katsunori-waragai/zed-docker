@@ -90,7 +90,7 @@ python　スクリプトは、容易に実行できる。
 zed-sdk/body tracking/body tracking/python$ python3 body_tracking.py
 
 
-![](fig/body_tracking_python.png)
+![](fig/body_tracking2.png)
 
 検出した人のボーンを表示します。
 頭部については、鼻・両目・両耳の位置を表示します。
