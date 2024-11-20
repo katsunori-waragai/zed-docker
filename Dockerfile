@@ -7,7 +7,10 @@ RUN apt-get install -y libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev lib
 RUN apt-get install -y libv4l-dev v4l-utils qv4l2
 RUN apt-get install -y curl
 RUN apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+
 RUN python3 -m pip install -U pip
 RUN python3 -m pip install loguru tqdm thop ninja tabulate
 RUN python3 -m pip install pycocotools
+
+RUN git clone https://github.com/stereolabs/zed-sdk.git
 
