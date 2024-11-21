@@ -11,3 +11,4 @@ RUN python3 -m pip install -U pip
 RUN python3 -m pip install loguru tqdm thop ninja tabulate
 RUN python3 -m pip install pycocotools
 
+RUN git clone https://github.com/stereolabs/zed-sdk.git
